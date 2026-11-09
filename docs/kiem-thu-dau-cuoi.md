@@ -41,5 +41,5 @@ Nhãn runner và bộ lọc push được đối chiếu với [danh sách runne
 - `swift test --filter e2e46`: 6/6 đạt.
 - Kiểm tra YAML và bộ lọc chỉ main/tag: đạt bằng Ruby YAML; đây không phải một lượt chạy GitHub Actions.
 - `swift test`: **533/533 đạt** (492 PVTACoreTests + 8 NhapDuLieuTests + 33 CLITests), gồm 6 test E2E mới. Bộ CLI qua PTY hoàn tất sau khoảng 82 giây.
-- CI: đã nối remote `https://github.com/phandinhdoc-spec/pvta.git` theo chỉ định người dùng. Đang đưa mã nguồn và workflow lên main để kiểm tra CI; nhiệm vụ 46 giữ `[ ]` cho tới khi có bằng chứng CI xanh.
+- CI: đã nối remote `https://github.com/phandinhdoc-spec/pvta.git` và tạo commit cục bộ. Push bị GitHub từ chối do OAuth thiếu scope `workflow`; SSH chưa có khóa được chấp nhận. Cần chạy `gh auth refresh -h github.com -s workflow` và xác nhận trong trình duyệt, sau đó push main để chạy CI. Chưa có lượt Actions; nhiệm vụ 46 giữ `[ ]`.
 - Chưa kiểm chứng AI thật, thao tác mở/hiển thị bằng Microsoft Office thật trong lượt này, hoặc mọi biến thể tệp Office/PDF bên ngoài. Backend AI giả chỉ xác nhận luồng tích hợp, không đánh giá chất lượng trả lời của model thật.
