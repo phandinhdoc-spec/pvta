@@ -40,7 +40,7 @@ codesign --force --sign - "$app"
 codesign --verify --deep --strict "$app"
 ln -s /Applications/PVTA.app/Contents/MacOS/pvta "$payload/usr/local/bin/pvta"
 pkgbuild --analyze --root "$payload" "$staging/components.plist"
-/usr/libexec/PlistBuddy -c 'Set :0:BundleIsRelocatable false' "$staging/components.plist"
+/usr/libexec/PlistBuddy -c 'Add :0:BundleIsRelocatable bool false' "$staging/components.plist"
 pkgbuild --root "$payload" --component-plist "$staging/components.plist" \
   --identifier vn.pvta.installer --version "$version" --install-location / \
   --ownership recommended "$staging/payload.pkg"

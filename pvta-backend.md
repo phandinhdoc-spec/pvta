@@ -559,4 +559,6 @@ Tên phương thức cũ trong ngoặc là để đối chiếu với MySoft, kh
   - Tham khảo MySoft: `HOW-TO-RELEASE.md`, `scripts/build-studio-dmg.sh`.
   - Làm: build Release cho Apple Silicon; đóng gói `.dmg` đã ký mã và công chứng; lệnh `pvta` đi kèm trong ứng dụng, có cách đưa vào PATH; quy trình phát hành chỉ tải lên tệp `.dmg`, không tải mã nguồn hay script; ghi chú phát hành ngắn bằng tiếng Việt.
   - Xong khi: cài `.dmg` trên một máy Mac sạch chạy được cả Desktop và `pvta --version`; cài lại bản mới giữ nguyên dữ liệu.
-  - **Chỉ đạo thay thế ngày 10/11/2026:** tạo PKG tại laptop, GitHub chỉ lưu mã nguồn; không chạy CI hoặc phát hành artifact trên GitHub. Đang tạo gói cài cục bộ, giữ nguyên dữ liệu người dùng.
+  - **Chỉ đạo thay thế ngày 10/11/2026:** tạo PKG tại laptop, GitHub chỉ lưu mã nguồn; không chạy CI hoặc phát hành artifact trên GitHub.
+  - **Bằng chứng đóng gói cục bộ:** build Release ARM64 đạt; `scripts/dong-goi-pkg.sh` tạo `dist/PVTA-0.1.0-arm64.pkg` (8,1 MB) và SHA-256. Giải nén payload kiểm Info.plist, hai Mach-O ARM64, chữ ký ad-hoc, bundle upgrade không relocate, liên kết `/usr/local/bin/pvta`; binary CLI từ payload trả `pvta 0.1.0`. Không có payload hoặc script sửa dữ liệu người dùng. Hướng dẫn `docs/dong-goi-pkg.md`.
+  - **Chưa kiểm chứng:** cài trên Mac sạch, mở Desktop sau cài và cài cập nhật giữ dữ liệu thực tế; chưa ký Developer ID/Installer hoặc notarize vì máy không có chứng chỉ hợp lệ. Giữ `[ ]` cho các tiêu chí cài đặt chưa thử; đã hoàn thành yêu cầu tạo PKG tại laptop.
