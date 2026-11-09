@@ -1,0 +1,4 @@
+[
+  { "id": "m1", "role": "user", "text": "Xin chào." },
+  { "id": "m2", "role": "assistant", "text": "Chào thầy cô!" }
+]

@@ -1,0 +1,9 @@
+[
+  {"title":"Nghiệm phương trình bậc hai","subject":"math","latex":"x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}"},
+  {"title":"Tổng các số tự nhiên","subject":"math","latex":"\\sum_{i=1}^{n}i=\\frac{n(n+1)}{2}"},
+  {"title":"Động năng","subject":"physics","latex":"E_k=\\frac{1}{2}mv^2"},
+  {"title":"Định luật Ohm","subject":"physics","latex":"I=\\frac{U}{R}"},
+  {"title":"Phản ứng tạo nước","subject":"chemistry","latex":"\\ce{2H2 + O2 -> 2H2O}"},
+  {"title":"Ion sulfate","subject":"chemistry","latex":"\\ce{SO4^{2-}}"},
+  {"title":"Cân bằng ammonia","subject":"chemistry","latex":"\\ce{N2 + 3H2 <=> 2NH3}"}
+]

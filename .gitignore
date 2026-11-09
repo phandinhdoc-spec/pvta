@@ -1,0 +1,14 @@
+# Sản phẩm biên dịch và dữ liệu riêng của máy
+.build/
+.swiftpm/
+.DS_Store
+test-results/
+*.log
+*.bak
+.env
+.env.*
+*.p12
+*.p8
+*.key
+*.mobileprovision
+nhat-ky/

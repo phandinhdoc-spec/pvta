@@ -1,0 +1,5 @@
+#set page(margin: 24mm)
+#set text(size: 13pt)
+#set par(leading: 0.8em)
+#show heading: it => text(size: 1.4em, fill: rgb("164B36"), it)
+#set table(inset: 8pt)

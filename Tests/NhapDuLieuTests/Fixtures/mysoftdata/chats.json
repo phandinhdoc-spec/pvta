@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "chats": [
+    {
+      "id": "aabbccdd11223344aabbccdd11223344",
+      "title": "Soạn bài giảng",
+      "host": "word",
+      "updatedAt": 1700000000000
+    },
+    {
+      "id": "bbccddee22334455bbccddee22334455",
+      "title": "Chấm điểm học sinh",
+      "host": "excel",
+      "updatedAt": 1700001000000
+    },
+    {
+      "id": "ccddeeff33445566ccddeeff33445566",
+      "title": "",
+      "updatedAt": 1700002000000
+    }
+  ],
+  "projects": [],
+  "globalRules": [
+    {
+      "title": "Luôn dùng tiếng Việt",
+      "text": "Mọi câu trả lời đều dùng tiếng Việt chuẩn, không dùng tiếng Anh nếu không cần thiết.",
+      "always": true
+    },
+    {
+      "title": "Giải thích rõ ràng",
+      "text": "Giải thích từng bước, dễ hiểu với giáo viên phổ thông.",
+      "always": false
+    }
+  ],
+  "hostRules": [],
+  "docRules": []
+}

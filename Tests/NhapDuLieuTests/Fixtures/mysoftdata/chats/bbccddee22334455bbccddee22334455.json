@@ -1,0 +1,5 @@
+[
+  { "id": "m1", "role": "user",      "text": "Giúp tôi tính điểm trung bình lớp 9A.", "createdAt": 1700000900000 },
+  { "id": "m2", "role": "assistant", "text": "Vui lòng cung cấp bảng điểm để tôi tính.", "createdAt": 1700000950000 },
+  { "id": "m3", "role": "user",      "text": "Đây là điểm: Toán 8, Lý 7, Hóa 9.",    "createdAt": 1700000970000 }
+]

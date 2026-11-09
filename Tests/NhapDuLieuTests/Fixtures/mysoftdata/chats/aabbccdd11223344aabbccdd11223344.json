@@ -1,0 +1,7 @@
+[
+  { "id": "m1", "role": "user",      "text": "Hãy giúp tôi soạn bài giảng về địa lý lớp 8.", "createdAt": 1699999900000 },
+  { "id": "m2", "role": "assistant", "text": "Tôi sẽ giúp thầy cô soạn bài giảng địa lý lớp 8.",  "createdAt": 1699999950000 },
+  { "id": "m3", "role": "user",      "text": "Bắt đầu từ chương 1 nhé.",  "createdAt": 1699999960000 },
+  { "id": "m4", "role": "assistant", "text": "Chương 1 nói về bản đồ và các ký hiệu địa lý.", "createdAt": 1699999970000 },
+  { "id": "m5", "role": "user",      "text": "Rất tốt, tiếp tục.",        "createdAt": 1699999980000 }
+]

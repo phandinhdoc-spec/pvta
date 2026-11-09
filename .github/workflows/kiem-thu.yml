@@ -1,0 +1,74 @@
+name: Kiểm thử PVTA
+
+# Chỉ chạy khi đẩy main hoặc tag; không chạy lại trên mọi pull request.
+on:
+  push:
+    branches: [main]
+    tags: ['**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kiem-thu-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  kiem-thu:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+      PVTA_CLAUDE_BIN: /usr/bin/false
+      PVTA_CODEX_BIN: /usr/bin/false
+      PVTA_AGY_BIN: /usr/bin/false
+      PVTA_OPENCODE_BIN: /usr/bin/false
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Kiểm tra Apple Silicon và chuẩn bị bộ dàn trang
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = arm64
+          mkdir -p test-results
+          swift --version | tee test-results/environment.log
+          xcodebuild -version | tee -a test-results/environment.log
+          python3 --version | tee -a test-results/environment.log
+          if ! command -v typst >/dev/null; then brew install typst; fi
+          typst --version | tee -a test-results/environment.log
+      - name: Biên dịch CLI và Desktop
+        shell: bash
+        run: |
+          set -euo pipefail
+          swift build 2>&1 | tee test-results/build.log
+      - name: Toàn bộ kiểm thử, gồm sáu luồng đầu-cuối
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PVTA_TEST_BINARY="$(swift build --show-bin-path)/pvta"
+          swift test 2>&1 | tee test-results/tests.log
+      - name: Báo cáo kết quả
+        if: always()
+        shell: bash
+        env:
+          RESULT: ${{ job.status }}
+        run: |
+          {
+            echo '## Kiểm thử PVTA'
+            echo "Kết quả job: $RESULT"
+            echo 'Đầu-cuối: DOCX, XLSX, PDF, PowerPoint, Plan, quy trình đa nhánh qua pvta call.'
+            echo 'AI giả; chưa kiểm chứng AI thật hoặc mở bằng Office thật trong lượt CI này.'
+            if test -f test-results/tests.log; then
+              grep 'Test run with' test-results/tests.log || true
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Giữ nhật ký kiểm thử trong 7 ngày
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ket-qua-kiem-thu
+          path: test-results/*.log
+          retention-days: 7
+          if-no-files-found: warn
