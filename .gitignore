@@ -12,3 +12,5 @@ test-results/
 *.key
 *.mobileprovision
 nhat-ky/
+# Bộ cài tạo tại laptop, không đưa lên GitHub
+dist/

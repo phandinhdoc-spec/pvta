@@ -43,3 +43,7 @@ Nhãn runner và bộ lọc push được đối chiếu với [danh sách runne
 - `swift test`: **533/533 đạt** (492 PVTACoreTests + 8 NhapDuLieuTests + 33 CLITests), gồm 6 test E2E mới. Bộ CLI qua PTY hoàn tất sau khoảng 82 giây.
 - CI: đã nối remote `https://github.com/phandinhdoc-spec/pvta.git` và tạo commit cục bộ. Push bị GitHub từ chối do OAuth thiếu scope `workflow`; SSH chưa có khóa được chấp nhận. Cần chạy `gh auth refresh -h github.com -s workflow` và xác nhận trong trình duyệt, sau đó push main để chạy CI. Chưa có lượt Actions; nhiệm vụ 46 giữ `[ ]`.
 - Chưa kiểm chứng AI thật, thao tác mở/hiển thị bằng Microsoft Office thật trong lượt này, hoặc mọi biến thể tệp Office/PDF bên ngoài. Backend AI giả chỉ xác nhận luồng tích hợp, không đánh giá chất lượng trả lời của model thật.
+
+## Chỉ đạo mới ngày 10/11/2026
+
+Người dùng yêu cầu dừng CI và chỉ dùng GitHub lưu mã nguồn. Workflow đã được gỡ; lượt 42712894114 được yêu cầu hủy. Hai lượt CI trước đó phát hiện lỗi compiler Swift 6.1.2: giữ PID bất biến trong ScriptRunner và đổi tên biến currentBranch để không che hàm now trong SecretaryDev. Đã sửa, build và chạy lại toàn bộ 533 test trên laptop đều đạt. Không coi các lượt CI này là đạt; điều kiện CI được bỏ theo chỉ đạo mới. Đóng gói chuyển sang PKG tại laptop. Các mục CI ở trên là ghi nhận lịch sử trước chỉ đạo này.

@@ -543,14 +543,14 @@ Tên phương thức cũ trong ngoặc là để đối chiếu với MySoft, kh
   - **Chưa kiểm chứng:** thao tác thủ công trên hai cửa sổ SwiftUI của ứng dụng thật; giao diện đã biên dịch, tiêu chí nhiều cửa sổ được kiểm tra tự động qua trạng thái cửa sổ và lõi thật. Không gọi AI trả phí. MCP đồ thị báo `Transport closed`; đã đọc trực tiếp mã nguồn liên quan để kiểm chứng.
 
 
-- [ ] **Nhiệm vụ 46 — Kiểm thử đầu-cuối**
+- [x] **Nhiệm vụ 46 — Kiểm thử đầu-cuối** (10/11/2026, phạm vi kiểm thử cục bộ theo chỉ đạo mới)
   - Cần xong trước: các nhiệm vụ 15–18, 24, 25, 43.
   - Làm: bộ kiểm thử đầu-cuối với tệp mẫu thật: sửa một docx, đọc một xlsx, tách một pdf, tạo bộ slide, chạy một Plan và một quy trình đa nhánh với backend AI giả, gọi qua `pvta call`. Chạy trên GitHub Actions chỉ khi đẩy lên nhánh chính hoặc gắn nhãn, để tiết kiệm phút.
   - Xong khi: toàn bộ bộ test xanh trên máy và trên CI; báo cáo ghi rõ phần nào chưa kiểm chứng (ví dụ chưa thử bằng AI thật).
   - **Bằng chứng trên máy (10/11/2026):** `swift build` đạt; `swift test --filter e2e46` đạt 6/6; `swift test` đạt toàn bộ **533 test** (492 PVTACoreTests + 8 NhapDuLieuTests + 33 CLITests). Sáu luồng đều chạy tiến trình `pvta call --file ... --events` thật qua socket vào lõi thật, chỉ thay backend AI/KeyStore bằng bản giả: sửa DOCX trên bản sao có duyệt và kiểm XML bằng unzip; đọc giá trị XLSX từ kết quả công cụ; tách PDF, đọc lại và kiểm PDFKit; từ chối rồi duyệt tạo ba slide, kiểm nội dung và gói ZIP; lập/sửa Plan không tự chạy, duyệt từng bước; quy trình phải xem trước, hai nhánh cùng chờ tại AI giả trước khi thả cổng, bước hợp nhất nhận đủ hai kết quả. Nguồn mẫu không đổi; dữ liệu test nằm trong thư mục tạm.
   - **Tệp chính:** `Tests/PVTACoreTests/EndToEnd46Tests.swift`; dùng lại fixture `giao-an.docx`, `bang-diem.xlsx`, `pdf-tieng-viet.pdf`; `.github/workflows/kiem-thu.yml`; báo cáo và cách chạy `docs/kiem-thu-dau-cuoi.md`. Không sửa mã nghiệp vụ.
   - **CI đã chuẩn bị:** workflow chỉ nhận push vào `main` hoặc tag, một job `macos-15` kiểm tra ARM64, cài Typst nếu thiếu, build rồi chạy toàn bộ test; hủy lượt cũ cùng ref, timeout 30 phút, lưu log 7 ngày. YAML và bộ lọc main/tag đã kiểm tra trên máy; chưa coi đó là CI xanh.
-  - **Bị chặn ở CI:** đã nối remote `https://github.com/phandinhdoc-spec/pvta.git` và tạo commit cục bộ. GitHub từ chối push vì OAuth hiện tại thiếu scope `workflow`; SSH cũng chưa có khóa được chấp nhận. Chưa có lượt Actions. Cần cấp quyền bằng `gh auth refresh -h github.com -s workflow`, rồi push và kiểm tra CI; giữ `[ ]` tới khi workflow xanh.
+  - **Chỉ đạo thay thế ngày 10/11/2026:** người dùng yêu cầu dừng CI, GitHub chỉ lưu mã nguồn, build và đóng gói PKG tại laptop. Đã hủy lượt Actions đang chạy và gỡ workflow. Điều kiện CI không còn áp dụng theo chỉ đạo này; không tuyên bố CI xanh. Sau hai sửa tương thích compiler (PID bất biến và biến currentBranch không che hàm now), build và toàn bộ 533 test cục bộ vẫn đạt.
   - **Chưa kiểm chứng:** AI thật, mở/hiển thị bằng Office thật trong lượt kiểm thử này, CI trên runner GitHub. MCP đồ thị báo `Transport closed`; đã đọc trực tiếp mã nguồn liên quan. Chi tiết bằng chứng và giới hạn trong `docs/kiem-thu-dau-cuoi.md`.
 
 
@@ -559,4 +559,4 @@ Tên phương thức cũ trong ngoặc là để đối chiếu với MySoft, kh
   - Tham khảo MySoft: `HOW-TO-RELEASE.md`, `scripts/build-studio-dmg.sh`.
   - Làm: build Release cho Apple Silicon; đóng gói `.dmg` đã ký mã và công chứng; lệnh `pvta` đi kèm trong ứng dụng, có cách đưa vào PATH; quy trình phát hành chỉ tải lên tệp `.dmg`, không tải mã nguồn hay script; ghi chú phát hành ngắn bằng tiếng Việt.
   - Xong khi: cài `.dmg` trên một máy Mac sạch chạy được cả Desktop và `pvta --version`; cài lại bản mới giữ nguyên dữ liệu.
-  - **Bị chặn (10/11/2026):** nhiệm vụ 46 chưa hoàn thành vì chưa có kết quả CI trên GitHub Actions. Theo quy tắc 1.1.1, chưa bắt đầu đóng gói nhiệm vụ 47; cần hoàn tất và đánh dấu nhiệm vụ 46 trước.
+  - **Chỉ đạo thay thế ngày 10/11/2026:** tạo PKG tại laptop, GitHub chỉ lưu mã nguồn; không chạy CI hoặc phát hành artifact trên GitHub. Đang tạo gói cài cục bộ, giữ nguyên dữ liệu người dùng.
