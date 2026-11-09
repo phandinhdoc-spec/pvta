@@ -221,8 +221,8 @@ public actor SecretaryDev {
                     if sha.count == 40, (try await git(repo, ["cat-file", "-e", sha + "^{commit}"])).code == 0 { throw PVTAError("AI đã tự đẩy lên origin trong lúc làm (không được phép). Hãy kiểm tra các nhánh trên GitHub.") }
                 }
             }
-            let now = try await must(repo, ["rev-parse", "--abbrev-ref", "HEAD"])
-            guard now == branch else { throw PVTAError("AI đã đổi nhánh sang “\(now)”; hủy để an toàn.") }
+            let currentBranch = try await must(repo, ["rev-parse", "--abbrev-ref", "HEAD"])
+            guard currentBranch == branch else { throw PVTAError("AI đã đổi nhánh sang “\(currentBranch)”; hủy để an toàn.") }
             try await must(repo, ["reset", "--soft", head])
             try await must(repo, ["add", "-A"])
             let files = try await must(repo, ["diff", "--cached", "--name-only", "--no-renames"]).split(separator: "\n").map(String.init).filter { !$0.isEmpty }
