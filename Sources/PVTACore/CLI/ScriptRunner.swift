@@ -223,11 +223,12 @@ public enum ScriptRunner {
             }
         }
 
+        let childPID = pid
         return await withTaskCancellationHandler {
             await withCheckedContinuation { continuation in
                 DispatchQueue.global(qos: .userInitiated).async {
                     var status: Int32 = 0
-                    while waitpid(pid, &status, 0) < 0 && errno == EINTR {}
+                    while waitpid(childPID, &status, 0) < 0 && errno == EINTR {}
                     readGroup.wait()
                     let cancelled = Task.isCancelled || ((status & 0x7f) != 0)
                     let code: Int32
@@ -245,7 +246,7 @@ public enum ScriptRunner {
                 }
             }
         } onCancel: {
-            killProcessGroup(pid)
+            killProcessGroup(childPID)
         }
     }
 }
